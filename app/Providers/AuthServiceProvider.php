@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\PasswordlessUserProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -25,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Auth::provider('passwordless', function ($app, array $config) {
+            return new PasswordlessUserProvider($app['hash'], $config['model']);
+        });
     }
 }
