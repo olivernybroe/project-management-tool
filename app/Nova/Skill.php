@@ -56,6 +56,9 @@ class Skill extends Resource
                             ->displayUsing(function($field) {}),
                     ];
                 }),
+            Number::make('Employees', function () {
+                return $this->employees()->count();
+            }),
         ];
     }
 

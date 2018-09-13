@@ -6,6 +6,7 @@ use App\School as SchoolModel;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -48,6 +49,10 @@ class School extends Resource
                 ->sortable()
                 ->rules('required', 'max:255', 'unique:schools,name'),
             HasMany::make('Educations'),
+
+            Number::make('Educations', function () {
+                return $this->educations()->count();
+            }),
         ];
     }
 

@@ -67,6 +67,14 @@ class Employee extends Resource
                 }),
 
             BelongsToMany::make('Educations'),
+
+            Number::make('Educations', function () {
+                return $this->educations()->count();
+            }),
+
+            Number::make('Skills', function () {
+                return $this->skills()->count();
+            }),
         ];
     }
 
