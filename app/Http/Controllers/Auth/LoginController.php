@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
 class LoginController extends \Laravel\Nova\Http\Controllers\LoginController
@@ -23,13 +21,6 @@ class LoginController extends \Laravel\Nova\Http\Controllers\LoginController
         $this->validate($request, [
             $this->username() => 'required|string',
         ]);
-    }
-
-    protected function attemptLogin(Request $request)
-    {
-        return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        );
     }
 
     protected function credentials(Request $request)

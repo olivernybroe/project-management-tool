@@ -18,7 +18,13 @@ class Employee extends User
         'name',
     ];
 
-    public function getAuthPassword()
+    /**
+     * Set the remember token name to null.
+     * This will cause the employee ot have no support for remember tokens.
+     *
+     * @return null
+     */
+    public function getRememberTokenName()
     {
         return null;
     }
