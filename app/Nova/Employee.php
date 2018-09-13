@@ -2,21 +2,21 @@
 
 namespace App\Nova;
 
-use App\Employee;
+use App\Employee as EmployeeModel;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
 
-class User extends Resource
+class Employee extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = Employee::class;
+    public static $model = EmployeeModel::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.

@@ -17,6 +17,8 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->timestamp('employed_at');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
