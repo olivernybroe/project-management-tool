@@ -20,6 +20,7 @@ class CreateEducationsTable extends Migration
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->unique(['name', 'school_id']);
+            $table->timestamps();
         });
     }
 

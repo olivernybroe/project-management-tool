@@ -2,21 +2,20 @@
 
 namespace App\Nova;
 
-use App\School as SchoolModel;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class School extends Resource
+class Education extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = SchoolModel::class;
+    public static $model = \App\Education::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -34,6 +33,17 @@ class School extends Resource
         'id', 'name'
     ];
 
+    public static function label()
+    {
+        return 'Educations';
+    }
+
+    public static function singularLabel()
+    {
+        return 'Education';
+    }
+
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -46,8 +56,8 @@ class School extends Resource
             ID::make()->sortable()->hideFromIndex(),
             Text::make('name')
                 ->sortable()
-                ->rules('required', 'max:255', 'unique:schools,name'),
-            HasMany::make('Educations'),
+                ->rules('required', 'max:255', 'unique:educations,name'),
+            BelongsTo::make('School'),
         ];
     }
 
