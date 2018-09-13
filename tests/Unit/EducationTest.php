@@ -5,6 +5,7 @@ namespace Tests\Unit;
 
 
 use App\Education;
+use App\Employee;
 use App\School;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -36,5 +37,22 @@ class EducationTest extends TestCase
         $education = $education->refresh();
 
         $this->assertEquals($school->name, $education->school->name);
+    }
+
+    /** @test */
+    public function can_get_employees_from_education()
+    {
+        /** @var Employee $employee */
+        $employee = factory(Employee::class)->create();
+
+        /** @var Education $education */
+        $education = factory(Education::class)->create();
+
+        $education->employees()->save($employee);
+
+        $education = $education->refresh();
+
+        $this->assertCount(1, $education->employees);
+        $this->assertEquals($employee->name, $education->employees->first()->name);
     }
 }

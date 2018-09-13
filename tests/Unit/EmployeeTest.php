@@ -4,6 +4,7 @@
 namespace Tests\Unit;
 
 
+use App\Education;
 use App\Employee;
 use App\Skill;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,5 +38,21 @@ class EmployeeTest extends TestCase
         $this->assertCount(1, $employee->skills);
         $this->assertEquals($skill->name, $employee->skills->first()->name);
         $this->assertEquals(33, $employee->skills->first()->pivot->expertise);
+    }
+
+    /** @test */
+    public function can_get_educations_from_employee()
+    {
+        $education = factory(Education::class)->create();
+
+        /** @var Employee $employee */
+        $employee = factory(Employee::class)->create();
+
+        $employee->educations()->save($education);
+
+        $employee = $employee->refresh();
+
+        $this->assertCount(1, $employee->educations);
+        $this->assertEquals($education->name, $employee->educations->first()->name);
     }
 }

@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User;
  *
  * @package App
  * @property Collection skills
+ * @property Collection educations
+ * @property string name
  */
 class Employee extends User
 {
@@ -25,5 +27,10 @@ class Employee extends User
     public function skills()
     {
         return $this->belongsToMany(Skill::class)->withPivot(['expertise']);
+    }
+
+    public function educations()
+    {
+        return $this->belongsToMany(Education::class);
     }
 }

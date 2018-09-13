@@ -13,7 +13,7 @@ class CreateEmployeeEducationTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_education', function (Blueprint $table) {
+        Schema::create('education_employee', function (Blueprint $table) {
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('education_id');
 
@@ -29,6 +29,6 @@ class CreateEmployeeEducationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_education');
+        Schema::dropIfExists('education_employee');
     }
 }

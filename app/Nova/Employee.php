@@ -65,6 +65,8 @@ class Employee extends Resource
                             ->displayUsing(function($field) {}),
                     ];
                 }),
+
+            BelongsToMany::make('Educations'),
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
@@ -58,6 +59,7 @@ class Education extends Resource
                 ->sortable()
                 ->rules('required', 'max:255', 'unique:educations,name'),
             BelongsTo::make('School'),
+            BelongsToMany::make('Employees'),
         ];
     }
 

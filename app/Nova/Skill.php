@@ -43,6 +43,7 @@ class Skill extends Resource
     public function fields(Request $request)
     {
         return [
+            ID::make()->sortable()->hideFromIndex(),
             Text::make('name')
                 ->sortable()
                 ->rules('required', 'max:255', 'unique:skills,name'),
