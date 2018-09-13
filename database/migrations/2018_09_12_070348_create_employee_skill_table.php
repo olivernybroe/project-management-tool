@@ -16,6 +16,7 @@ class CreateEmployeeSkillTable extends Migration
         Schema::create('employee_skill', function (Blueprint $table) {
             $table->unsignedInteger('employee_id');
             $table->unsignedInteger('skill_id');
+            $table->integer('expertise');
 
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('cascade');
