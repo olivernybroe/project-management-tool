@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App
  * @property Collection employees
+ * @property Collection projects
+ * @property string name
  */
 class Skill extends Model
 {
@@ -20,5 +22,10 @@ class Skill extends Model
     public function employees()
     {
         return $this->belongsToMany(Employee::class)->withPivot(['expertise']);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
     }
 }

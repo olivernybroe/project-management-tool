@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'name' => 'Signifly Project Management',
+    'name' => 'Project Management',
 
     /*
     |--------------------------------------------------------------------------

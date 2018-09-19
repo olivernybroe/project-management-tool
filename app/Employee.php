@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\User;
  * @package App
  * @property Collection skills
  * @property Collection educations
+ * @property Collection projects
+ * @property Collection manages
  * @property string name
  */
 class Employee extends User
@@ -32,5 +34,15 @@ class Employee extends User
     public function educations()
     {
         return $this->belongsToMany(Education::class);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    public function manages()
+    {
+        return $this->hasMany(Project::class, 'manager_id');
     }
 }

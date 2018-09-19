@@ -6,6 +6,7 @@ namespace Tests\Unit;
 
 use App\Education;
 use App\Employee;
+use App\Project;
 use App\Skill;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -54,5 +55,39 @@ class EmployeeTest extends TestCase
 
         $this->assertCount(1, $employee->educations);
         $this->assertEquals($education->name, $employee->educations->first()->name);
+    }
+
+    /** @test */
+    public function can_get_projects_which_employee_is_part_of()
+    {
+        /** @var Project $project */
+        $project = factory(Project::class)->create();
+
+        /** @var Employee $employee */
+        $employee = factory(Employee::class)->create();
+
+        $employee->projects()->save($project);
+
+        $employee = $employee->refresh();
+
+        $this->assertCount(1, $employee->projects);
+        $this->assertEquals($project->name, $employee->projects->first()->name);
+    }
+
+    /** @test */
+    public function can_get_projects_which_employee_manages()
+    {
+        /** @var Project $project */
+        $project = factory(Project::class)->create();
+
+        /** @var Employee $employee */
+        $employee = factory(Employee::class)->create();
+
+        $employee->manages()->save($project);
+
+        $employee = $employee->refresh();
+
+        $this->assertCount(1, $employee->manages);
+        $this->assertEquals($project->name, $employee->manages->first()->name);
     }
 }

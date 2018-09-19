@@ -2,24 +2,22 @@
 
 namespace App\Nova;
 
-use App\Employee as EmployeeModel;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Employee extends Resource
+class Project extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = EmployeeModel::class;
+    public static $model = \App\Project::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -34,7 +32,7 @@ class Employee extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name',
+        'id', 'name'
     ];
 
     /**
@@ -48,30 +46,19 @@ class Employee extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make([
-                'attribute' => 'name'
-            ]),
-
-            Text::make('Name')
+            Text::make('name')
                 ->sortable()
-                ->rules('required', 'max:255', 'unique:employees,name'),
+                ->rules('required', 'max:255')
+                ->creationRules('unique:projects,name'),
 
-            BelongsToMany::make('Projects'),
+            BelongsToMany::make('Employees', 'members', Employee::class),
 
-            BelongsToMany::make('Skills')
-                ->fields(function () {
-                    return [
-                        Number::make('Expertise')
-                            ->min(0)->max(100)->step(1)
-                            ->rules('required', 'integer', 'min:0', 'max:100')
-                            ->displayUsing(function($field) {}),
-                    ];
-                }),
+            BelongsTo::make('Manager', 'manager', Employee::class),
 
-            BelongsToMany::make('Educations'),
+            BelongsToMany::make('Skills'),
 
-            Number::make('Skills', function () {
-                return $this->skills()->count();
+            Number::make('employees', function () {
+                return $this->members()->count() + 1;
             }),
         ];
     }

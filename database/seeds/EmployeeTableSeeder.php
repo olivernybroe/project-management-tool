@@ -12,6 +12,7 @@ class EmployeeTableSeeder extends Seeder
     public function run()
     {
         factory(\App\Employee::class)->create([
+            'id' => 1,
             'name' => 'Oliver'
         ]);
     }
