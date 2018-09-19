@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Employee as EmployeeModel;
+use Inspheric\Fields\Email;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -54,7 +55,18 @@ class Employee extends Resource
 
             Text::make('Name')
                 ->sortable()
-                ->rules('required', 'max:255', 'unique:employees,name'),
+                ->rules('required', 'max:255')
+                ->creationRules('unique:employees,name'),
+
+            Email::make('Email')
+                ->rules('required', 'email')
+                ->creationRules('unique:employees,email')
+                ->clickable()
+                ->clickableOnIndex(),
+
+            Text::make('Phone')
+                ->rules('required')
+                ->creationRules('unique:employees,phone'),
 
             BelongsToMany::make('Projects'),
 
@@ -70,7 +82,7 @@ class Employee extends Resource
 
             BelongsToMany::make('Educations'),
 
-            Number::make('Skills', function () {
+            Number::make('# of Skills', function () {
                 return $this->skills()->count();
             }),
         ];

@@ -15,5 +15,7 @@ class EmployeeTableSeeder extends Seeder
             'id' => 1,
             'name' => 'Oliver'
         ]);
+
+        factory(\App\Employee::class)->times(10)->create();
     }
 }

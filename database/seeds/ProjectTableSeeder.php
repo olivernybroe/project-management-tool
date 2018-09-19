@@ -13,7 +13,8 @@ class ProjectTableSeeder extends Seeder
     {
         factory(\App\Project::class)->create([
             'name' => 'Wordpress commercial website',
-            'manager_id' => 1
+            'manager_id' => 1,
+            'preferred_employees' => 4,
         ]);
     }
 }

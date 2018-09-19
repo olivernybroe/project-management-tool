@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->unsignedInteger('manager_id');
+            $table->unsignedInteger('preferred_employees');
 
             $table->foreign('manager_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();

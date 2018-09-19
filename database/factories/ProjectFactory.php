@@ -7,6 +7,7 @@ $factory->define(\App\Project::class, function (Faker $faker) {
         'name' => $faker->unique()->name,
         'manager_id' => function() {
             return factory(\App\Employee::class)->create()->getKey();
-        }
+        },
+        'preferred_employees' => $faker->numberBetween(0, 10),
     ];
 });

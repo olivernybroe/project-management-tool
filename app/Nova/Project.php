@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Olivernybroe\TeamMatcher\TeamMatcher;
 
 class Project extends Resource
 {
@@ -50,6 +51,8 @@ class Project extends Resource
                 ->sortable()
                 ->rules('required', 'max:255')
                 ->creationRules('unique:projects,name'),
+
+            TeamMatcher::make(),
 
             BelongsToMany::make('Employees', 'members', Employee::class),
 
