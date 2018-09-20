@@ -14,6 +14,7 @@
         "laravel/framework": "5.7.*",
         "laravel/nova": "*",
         "laravel/tinker": "^1.0",
+        "markrogoyski/math-php": "^0.44.0",
         "olivernybroe/team-matcher": "*"
     },
     "require-dev": {
