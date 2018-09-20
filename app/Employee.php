@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Carbon;
 
 /**
  * Class Employee
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Auth\User;
  * @property Collection projects
  * @property Collection manages
  * @property string name
+ * @property Carbon employed_at
  */
 class Employee extends User
 {
@@ -24,6 +26,10 @@ class Employee extends User
      */
     protected $fillable = [
         'name',
+    ];
+
+    protected $dates = [
+        'employed_at'
     ];
 
     public function skills()

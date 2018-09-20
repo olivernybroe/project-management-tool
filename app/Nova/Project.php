@@ -61,8 +61,10 @@ class Project extends Resource
             BelongsToMany::make('Skills'),
 
             Number::make('employees', function () {
-                return $this->members()->count() + 1;
+                return $this->members()->count() + 1; // +1 for manager
             }),
+
+            Number::make('Preferred # of employees', 'preferred_employees'),
         ];
     }
 
